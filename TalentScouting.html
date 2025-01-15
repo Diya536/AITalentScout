@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Talent Scout - Sports Analytics Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        :root {
+            --primary: #2C5282;
+            --secondary: #4A90E2;
+            --success: #48BB78;
+            --background: #F7FAFC;
+            --white: #FFFFFF;
+            --gray: #718096;
+            --light-gray: #EDF2F7;
+        }
+
+        body {
+            background-color: var(--background);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Flexbox layout for Zones */
+        .all-records {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+
+        .record-zone {
+            width: 23%;
+            background-color: var(--light-gray);
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .record-zone h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .button {
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .button:hover {
+            background-color: var(--primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--light-gray);
+            text-align: left;
+        }
+
+        .data-table th {
+            background: var(--light-gray);
+            color: var(--primary);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+        }
+
+        .status-active {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        /* Flexbox layout for sections */
+        .sections-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .sport-section {
+            width: calc(33.33% - 1.33rem); /* Three columns, each taking up 33% width */
+            background: var(--white);
+            padding: 1.5rem; /* Increased padding for bigger box size */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            border-radius: 8px; /* Rounded corners */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+        }
+
+        .sport-section:hover {
+            transform: translateY(-10px); /* Slight lift effect */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+        }
+
+        .sport-section img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease; /* Smooth scaling effect for image */
+        }
+
+        .sport-section:hover img {
+            transform: scale(1.05); /* Slight zoom effect on image */
+        }
+
+        /* Responsive design for small screens */
+        @media (max-width: 1024px) {
+            .sport-section {
+                width: calc(50% - 1.33rem); /* Two columns on medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sport-section {
+                width: 100%; /* Single column on smaller screens */
+            }
+        }
+
+        /* New Features Section */
+        .features-section {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .features-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item span {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        .footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">AI Talent Scout</div>
+    </nav>
+
+    <div class="container">
+        <!-- Zones Section at the top -->
+        <div class="all-records">
+            <div class="record-zone">
+                <h3>North Zone</h3>
+                <p>Best States: Punjab, Haryana</p>
+                <p>Best Sports: Wrestling, Hockey</p>
+            </div>
+            <div class="record-zone">
+                <h3>South Zone</h3>
+                <p>Best States: Tamil Nadu, Kerala</p>
+                <p>Best Sports: Badminton, Football</p>
+            </div>
+            <div class="record-zone">
+                <h3>East Zone</h3>
+                <p>Best States: West Bengal, Odisha</p>
+                <p>Best Sports: Track, Cricket</p>
+            </div>
+            <div class="record-zone">
+                <h3>West Zone</h3>
+                <p>Best States: Maharashtra, Gujarat</p>
+                <p>Best Sports: Kabaddi, Boxing</p>
+            </div>
+        </div>
+
+        <!-- Sports Sections -->
+        <div class="sections-container">
+            <script>
+                const sports = ["Track", "Swimming", "Football", "Kabaddi", "Cricket", "Hockey", "Badminton", "Boxing", "Wrestling", "Tennis"];
+                const athletes = [
+                    "Arjun Kumar", "Vikas Sharma", "Neha Singh", "Priya Das", "Rohit Verma",
+                    "Anjali Gupta", "Siddharth Jain", "Kavita Yadav", "Rahul Mishra", "Sneha Mehta"
+                ];
+
+                // Adding images for each sport
+                const sportImages = {
+                    "Track": "Track.jpg",
+                    "Swimming": "Swim.jpg",
+                    "Football": "Football.jpg",
+                    "Kabaddi": "Kabbadi.jpg",
+                    "Cricket": "Cric.jpg",
+                    "Hockey": "Hockey.jpg",
+                    "Badminton": "Badminton.jpg",
+                    "Boxing": "Boxing.jpg",
+                    "Wrestling": "Wres.jpg",
+                    "Tennis": "Tennis.jpg"
+                };
+
+                sports.forEach(sport => {
+                    document.write(`
+                        <div class="sport-section">
+                            <h2 class="section-title">${sport}</h2>
+                            <img src="${sportImages[sport]}" alt="${sport} image">
+                            <button class="button" onclick="toggleAnalysis('${sport}')">Analyze ${sport}</button>
+                            <div id="${sport}-analysis" style="display: none;">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Athlete</th>
+                                            <th>Speed Rating</th>
+                                            <th>Agility Score</th>
+                                            <th>Endurance</th>
+                                            <th>Strength Index</th>
+                                            <th>Overall Rating</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    `);
+
+                    athletes.forEach((athlete, index) => {
+                        const speedRating = (Math.random() * 5 + 5).toFixed(1);
+                        const agilityScore = (Math.random() * 5 + 5).toFixed(1);
+                        const endurance = (Math.random() * 5 + 5).toFixed(1);
+                        const strengthIndex = (Math.random() * 5 + 5).toFixed(1);
+                        const overallRating = (
+                            (parseFloat(speedRating) +
+                             parseFloat(agilityScore) +
+                             parseFloat(endurance) +
+                             parseFloat(strengthIndex)) / 4
+                        ).toFixed(1);
+
+                        document.write(`
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${athlete}</td>
+                                <td>${speedRating}</td>
+                                <td>${agilityScore}</td>
+                                <td>${endurance}</td>
+                                <td>${strengthIndex}</td>
+                                <td>${overallRating}</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                        `);
+                    });
+
+                    document.write(`
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `);
+                });
+
+                function toggleAnalysis(sport) {
+                    const analysis = document.getElementById(`${sport}-analysis`);
+                    analysis.style.display = analysis.style.display === 'none' ? 'block' : 'none';
+                }
+            </script>
+        </div>
+
+        <!-- New Features Section -->
+        <div class="features-section">
+            <h2 class="features-title">Key Features</h2>
+            <p class="feature-item"><span>Talent Identification:</span> Detect potential athletes early with AI-powered detection.</p>
+            <p class="feature-item"><span>Wider Reach:</span> Cover rural and underserved areas for talent scouting.</p>
+            <p class="feature-item"><span>Fair Assessment:</span> Use AI to provide an unbiased evaluation of athletes.</p>
+            <p class="feature-item"><span>Data Analytics:</span> Analyze performance metrics to make data-driven decisions.</p>
+            <p class="feature-item"><span>Improved Recruitment:</span> Streamline talent acquisition and recruitment processes.</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>© 2025 Sports Authority of India. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>
